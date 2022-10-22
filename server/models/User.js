@@ -13,6 +13,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      // match option is a type of validation that allows us to use regex to test the input value.
+      // If it doesn't match, we send back a custom error message stating that there must be a valid email address.
       match: [/.+@.+\..+/, 'Must match an email address!']
     },
     password: {
@@ -41,6 +43,7 @@ const userSchema = new Schema(
 );
 
 // set up pre-save middleware to create password
+// check to see if the data is new or if the password has been modified
 userSchema.pre('save', async function(next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;

@@ -2,6 +2,7 @@
 const { gql } = require('apollo-server-express');
 
 // create our typeDefs
+// GraphQL requires that we explicitly define the type of data that is returning. 
 const typeDefs = gql`
   type User {
     _id: ID
@@ -28,17 +29,17 @@ const typeDefs = gql`
     username: String
   }
   
+  type Auth {
+    token: ID!
+    user: User
+  }
+  
   type Query {
     me: User
     users: [User]
     user(username: String!): User
     thoughts(username: String): [Thought]
     thought(_id: ID!): Thought
-  }
-  
-  type Auth {
-    token: ID!
-    user: User
   }
 
   type Mutation {

@@ -1,5 +1,5 @@
 const express = require('express');
-// import ApolloServer
+// import ApolloServer, used to integrate GraphQL into express server
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
@@ -7,13 +7,17 @@ const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 // import middleware
 const { authMiddleware } = require('./utils/auth');
+// import mongoose connection
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 // create a new Apollo server and pass in our schema data
+// we provide the type definitions and resolvers so they know what our API looks like and how it resolves requests. 
+// 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  // This ensures that every request performs an authentication check, and the updated request object will be passed to the resolvers as the context.
   context: authMiddleware
 });
 
@@ -32,6 +36,7 @@ app.get('*', (req, res) => {
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
+// This will create a special /graphql endpoint for the Express.js server that will serve as the main endpoint for accessing the entire API. 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   // integrate our Apollo server with the Express application as middleware

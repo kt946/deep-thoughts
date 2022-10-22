@@ -1,9 +1,18 @@
+// JSON Web Token, or JWT, is a JSON object that's been encoded into a tokenized string.
+// Contain all the data you need encoded into a single string.
+// Eliminate the need to save a session ID on the back end or in the database.
+// Decrease the amount of server-side resources needed to maintain authentication.
+// Can be generated anywhere and aren't tied to a single domain like cookies.
 const jwt = require('jsonwebtoken');
 
+// Optionally, tokens can be given an expiration date and a secret to sign the token with. 
+// Note that the secret has nothing to do with encoding. 
+// The secret merely enables the server to verify whether it recognizes this token.
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
 module.exports = {
+  // The signToken() function expects a user object and will add that user's username, email, and _id properties to the token. 
   signToken: function({ username, email, _id }) {
     const payload = { username, email, _id };
 
