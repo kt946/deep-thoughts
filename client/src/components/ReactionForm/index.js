@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_REACTION } from '../../utils/mutations';
 
+// this component expects thoughtId from prop, necessary for mutation
 const ReactionForm = ({ thoughtId }) => {
   const [reactionBody, setBody] = useState('');
   const [characterCount, setCharacterCount] = useState(0);

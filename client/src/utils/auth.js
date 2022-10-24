@@ -1,5 +1,7 @@
 import decode from 'jwt-decode';
 
+// we instantiate a new version of this for every component that imports it.
+// this ensures we are using a new version of this functionality and removes some risk of leaving remnant data hanging around
 class AuthService {
   // retrieve data saved in token
   getProfile() {
@@ -39,6 +41,7 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
+    // redirect user to the homepage
     window.location.assign('/');
   }
 

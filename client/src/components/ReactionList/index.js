@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// The ReactionList component is given the reactions array as a prop
 const ReactionList = ({ reactions }) => {
   return (
     <div className="card mb-3">

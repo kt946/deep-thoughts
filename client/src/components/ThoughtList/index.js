@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ThoughtList = ({ thoughts, title }) => {
+  // if there is no data in the thoughts array, return message; else return list of thoughts using .map() method
   if (!thoughts.length) {
     return <h3>No Thoughts Yet</h3>;
   }
@@ -26,6 +27,8 @@ const ThoughtList = ({ thoughts, title }) => {
               <Link to={`/thought/${thought._id}`}>
                 <p>{thought.thoughtText}</p>
                 <p className="mb-0">
+                  {/* If there are no reactions, the user will start the discussion by adding the first reaction. */}
+                  {/* If there are reactions, the user will view or add their own reaction to an existing list. */}
                   Reactions: {thought.reactionCount} || Click to{' '}
                   {thought.reactionCount ? 'see' : 'start'} the discussion!
                 </p>

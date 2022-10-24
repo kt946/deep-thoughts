@@ -12,8 +12,7 @@ const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 // create a new Apollo server and pass in our schema data
-// we provide the type definitions and resolvers so they know what our API looks like and how it resolves requests. 
-// 
+// we provide the type definitions and resolvers so they know what our API looks like and how it resolves requests.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -27,10 +26,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Serve up static assets
+// this will check if the Node environment is in production
+// if it is, instruct the Express.js server to serve any files in the React application's build directory in the client folder.
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+// this is a wildcard GET route for the server
+// if we make a GET request to any location on the server that doesn't have an explicit route defined, respond with the production-ready React front-end code.
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });

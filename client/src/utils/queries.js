@@ -1,5 +1,7 @@
+// This file stores all of the GraphQL query requests.
 import { gql } from '@apollo/client';
 
+//  we can import this query function by name and use it anywhere we need throughout the front end of the application
 export const QUERY_THOUGHTS = gql`
   query thoughts($username: String) {
     thoughts(username: $username) {
@@ -57,6 +59,7 @@ export const QUERY_USER = gql`
   }
 `;
 
+// Because we aren't passing any variables to it, we can simply name the query, and GraphQL will handle the rest.
 export const QUERY_ME = gql`
   {
     me {

@@ -1,3 +1,4 @@
+// This file stores all of the GraphQL mutation requests.
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`

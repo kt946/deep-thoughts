@@ -7,6 +7,7 @@ const ThoughtForm = () => {
   const [thoughtText, setText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
   const [addThought, { error }] = useMutation(ADD_THOUGHT, {
+    // this update function allows us to update the cache of any related queries
     update(cache, { data: { addThought } }) {
       // could potentially not exist yet, so wrap in a try/catch
       try {
@@ -31,6 +32,7 @@ const ThoughtForm = () => {
     }
   });
 
+  // the handleChange() function stops updating the value of thoughtText once the character count reaches 280.
   const handleChange = event => {
     if (event.target.value.length <= 280) {
       setText(event.target.value);
@@ -57,8 +59,10 @@ const ThoughtForm = () => {
 
   return (
     <div>
+      {/* if character count is 280, add 'text-error' class */}
       <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}>
         Character Count: {characterCount}/280
+        {/* if error exists, render message */}
         {error && <span className="ml-2">Something went wrong...</span>}
       </p>
       <form 
